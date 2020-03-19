@@ -10,6 +10,7 @@
 
 namespace ccls {
 void MessageHandler::textDocument_didChange(TextDocumentDidChangeParam &param) {
+  if (!g_config)return;
   std::string path = param.textDocument.uri.getPath();
   wfiles->onChange(param);
   if (g_config->index.onChange)
@@ -27,6 +28,7 @@ void MessageHandler::textDocument_didClose(TextDocumentParam &param) {
 }
 
 void MessageHandler::textDocument_didOpen(DidOpenTextDocumentParam &param) {
+  if (!g_config)return;
   std::string path = param.textDocument.uri.getPath();
   WorkingFile *wf = wfiles->onOpen(param.textDocument);
   if (std::optional<std::string> cached_file_contents =

@@ -116,7 +116,7 @@ void filterCandidates(CompletionList &result, const std::string &complete_text,
   }
 
   auto finalize = [&]() {
-    int max_num = g_config->completion.maxNum;
+    int max_num = 20;
     if (items.size() > max_num) {
       items.resize(max_num);
       result.isIncomplete = true;
